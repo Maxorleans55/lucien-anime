@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUCIEN ANIME</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tom Select CSS (open source, Apache-2.0) -->
+  <link href="https://cdn.jsdelivr.net/npm/tom-select@2.6.2/dist/css/tom-select.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="motion.css">
+  <link rel="stylesheet" href="portfolio.css">
+</head>
+
+<body>
+
+  <header class="topbar">
+    <a class="logo" href="#home">
+      LUCIEN<span>ANIME</span>
+    </a>
+
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#browse">Browse</a>
+      <a href="#watchlist">My Watchlist</a>
+    </nav>
+
+    <input
+      id="searchInput"
+      type="search"
+      placeholder="Search anime..."
+    >
+  </header>
+
+  <main>
+
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <p class="eyebrow">YOUR NEXT ANIME OBSESSION</p>
+
+        <h1>
+          ENTER A WORLD<br>
+          BEYOND REALITY.
+        </h1>
+
+        <p class="hero-description">
+          Discover new worlds, unforgettable characters, and stories
+          that stay with you.
+        </p>
+
+        <a class="primary-button" href="#browse">
+          EXPLORE ANIME
+        </a>
+      </div>
+
+      <div class="hero-art">
+        <span>LUCIEN<br>ORIGINALS</span>
+      </div>
+    </section>
+
+    <section class="catalog" id="browse">
+
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">FIND YOUR NEXT STORY</p>
+          <h2>EXPLORE ANIME</h2>
+        </div>
+
+        <select id="genreFilter">
+          <option value="All">All genres</option>
+          <option value="Action">Action</option>
+          <option value="Fantasy">Fantasy</option>
+          <option value="Adventure">Adventure</option>
+          <option value="Drama">Drama</option>
+          <option value="Sci-Fi">Sci-Fi</option>
+        </select>
+      </div>
+
+      <div class="anime-grid" id="animeGrid"></div>
+
+    </section>
+
+    <section class="catalog watchlist-section" id="watchlist">
+
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">SAVED FOR LATER</p>
+          <h2>MY WATCHLIST</h2>
+        </div>
+      </div>
+
+      <div class="anime-grid" id="watchlistGrid"></div>
+
+      <p id="emptyWatchlist" class="empty-message">
+        Your watchlist is empty. Save an anime to see it here.
+      </p>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <a class="logo" href="#home">
+      LUCIEN<span>ANIME</span>
+    </a>
+
+    <p>Anime discovery and streaming experience.</p>
+  </footer>
+
+  <!-- ANIME DETAILS AND VIDEO PLAYER -->
+
+  <div class="modal" id="playerModal">
+
+    <div class="modal-content">
+
+      <button
+        class="close-button"
+        id="closeModal"
+        aria-label="Close"
+      >
+        ×
+      </button>
+
+      <p class="eyebrow">NOW SELECTED</p>
+
+      <h2 id="modalTitle">Anime title</h2>
+
+      <div id="animeDetailPanel">
+        <p class="modal-note">
+          Select an anime to see its details.
+        </p>
+      </div>
+
+      <!-- CLICK-TO-PLAY EPISODE PLAYER -->
+
+      <section class="stream-player-section" id="lucienPlayerSection">
+
+        <p class="eyebrow">LUCIEN VIDEO PLAYER</p>
+
+        <h3 id="nowPlayingTitle">SELECT AN EPISODE</h3>
+
+        <div class="youtube-player-wrap">
+          <iframe
+            id="episodeFrame"
+            title="LUCIEN ANIME episode player"
+            src="about:blank"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            referrerpolicy="strict-origin-when-cross-origin"
+          ></iframe>
+        </div>
+
+        <p id="videoStatus" class="modal-note" aria-live="polite">
+          Choose an available episode below. Only verified, embeddable official videos will play here.
+        </p>
+
+      </section>
+
+      <!-- TRAILERS -->
+
+      <div id="trailerSection"></div>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+  <!-- Tom Select JS: must load BEFORE motion.js -->
+  <script src="https://cdn.jsdelivr.net/npm/tom-select@2.6.2/dist/js/tom-select.complete.min.js"></script>
+
+  <script src="motion.js"></script>
+  <script src="portfolio.js"></script>
+
+</body>
+</html>

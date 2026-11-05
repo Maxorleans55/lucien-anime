@@ -1,0 +1,772 @@
+/* =========================================================
+   LUCIEN ANIME — motion layer
+   ========================================================= */
+
+/* ---------- Page load ---------- */
+
+.topbar {
+  animation: dropIn .7s cubic-bezier(.2, .8, .2, 1) backwards;
+  transition: min-height .3s ease, padding .3s ease, box-shadow .3s ease;
+}
+
+.topbar.scrolled {
+  min-height: 62px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .55);
+}
+
+.logo span {
+  animation: neon 3.5s ease-in-out infinite;
+}
+
+.topbar nav a {
+  position: relative;
+}
+
+.topbar nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s ease;
+}
+
+.topbar nav a:hover::after {
+  transform: scaleX(1);
+}
+
+/* ---------- Scroll progress bar ---------- */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 60;
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: linear-gradient(90deg, var(--green), var(--green-soft));
+  box-shadow: 0 0 12px var(--green);
+  will-change: transform;
+}
+
+/* ---------- Hero ---------- */
+
+.hero-content > * {
+  animation: heroIn .9s cubic-bezier(.2, .8, .2, 1) backwards;
+}
+
+.hero-content > :nth-child(1) { animation-delay: .25s; }
+.hero-content > :nth-child(2) { animation-delay: .40s; }
+.hero-content > :nth-child(3) { animation-delay: .55s; }
+.hero-content > :nth-child(4) { animation-delay: .70s; }
+
+/* slow vertical drift on the Gojo background (desktop) */
+@media (min-width: 761px) {
+  .hero {
+    animation: heroDrift 22s ease-in-out infinite alternate;
+  }
+}
+
+/* pulsing green aura */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background: radial-gradient(circle at 78% 42%, rgba(57, 255, 20, .2), transparent 46%);
+  animation: glowPulse 4.5s ease-in-out infinite;
+}
+
+/* "LUCIEN ORIGINALS" floating badge */
+.hero-art {
+  position: absolute;
+  right: 8%;
+  bottom: 12%;
+  z-index: 1;
+  padding: 14px 20px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: rgba(3, 8, 5, .55);
+  backdrop-filter: blur(8px);
+  box-shadow: var(--glow);
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 22px;
+  line-height: 1.1;
+  letter-spacing: 3px;
+  text-align: right;
+  animation: float 5s ease-in-out infinite;
+}
+
+/* rising embers (created by motion.js) */
+.hero-embers {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ember {
+  position: absolute;
+  bottom: -12px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 10px 2px rgba(57, 255, 20, .7);
+  opacity: 0;
+  animation: rise linear infinite;
+  will-change: transform, opacity;
+}
+
+/* shine sweep on buttons */
+.primary-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.primary-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .55), transparent);
+  transform: skewX(-20deg);
+  transition: left .6s ease;
+}
+
+.primary-button:hover::after {
+  left: 140%;
+}
+
+/* ---------- Scroll reveal ---------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .8s ease, transform .8s cubic-bezier(.2, .7, .2, 1);
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Cards ---------- */
+
+.anime-card.enter {
+  animation: cardIn .6s cubic-bezier(.2, .7, .2, 1) backwards;
+  animation-delay: calc(min(var(--i, 0), 12) * 60ms);
+}
+
+.poster img {
+  transition: transform .7s cubic-bezier(.2, .7, .2, 1);
+}
+
+.anime-card:hover .poster img {
+  transform: scale(1.08);
+}
+
+.card-actions button {
+  transition: background .2s ease, color .2s ease, transform .15s ease;
+}
+
+.card-actions button:active {
+  transform: scale(.95);
+}
+
+/* loading skeletons */
+.skeleton-card {
+  aspect-ratio: 175 / 370;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: linear-gradient(100deg, var(--surface) 30%, var(--surface-light) 50%, var(--surface) 70%);
+  background-size: 300% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+/* ---------- Modal ---------- */
+
+.modal.show {
+  animation: fadeIn .25s ease;
+}
+
+.modal.show .modal-content {
+  animation: modalIn .45s cubic-bezier(.2, .8, .2, 1);
+}
+
+.detail-layout,
+#episodeSection,
+#streamingSection {
+  animation: fadeUp .5s ease backwards;
+}
+
+#episodeSection { animation-delay: .08s; }
+#streamingSection { animation-delay: .16s; }
+
+.close-button {
+  transition: transform .3s ease, background .2s ease;
+}
+
+.close-button:hover {
+  transform: rotate(90deg);
+  background: #1a2b1f;
+}
+
+/* ---------- Keyframes ---------- */
+
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-100%); }
+}
+
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(36px); filter: blur(6px); }
+}
+
+@keyframes heroDrift {
+  from { background-position-y: 15%; }
+  to   { background-position-y: 40%; }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: .35; }
+  50%      { opacity: 1; }
+}
+
+@keyframes neon {
+  0%, 100% { text-shadow: 0 0 8px var(--green); }
+  50%      { text-shadow: 0 0 20px var(--green), 0 0 32px rgba(57, 255, 20, .5); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+
+@keyframes rise {
+  0%   { transform: translate3d(0, 0, 0) scale(.6); opacity: 0; }
+  10%  { opacity: var(--o, .8); }
+  100% { transform: translate3d(var(--dx, 20px), -700px, 0) scale(1); opacity: 0; }
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(34px) scale(.96); }
+}
+
+@keyframes shimmer {
+  from { background-position: 100% 0; }
+  to   { background-position: 0 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(40px) scale(.96); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 760px) {
+  .hero-art {
+    right: 5%;
+    bottom: 6%;
+    font-size: 15px;
+    padding: 10px 14px;
+  }
+}
+
+/* ---------- Respect "reduce motion" ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* =========================================================
+   LUCIEN ANIME — professional button system
+   ========================================================= */
+
+.primary-button,
+.watch-button,
+.save-button,
+.episode-item,
+.trailer-list button,
+.provider-list a {
+  position: relative;
+  isolation: isolate;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    color .25s ease,
+    background-color .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease,
+    transform .15s ease;
+}
+
+.primary-button:focus-visible,
+.watch-button:focus-visible,
+.save-button:focus-visible,
+.episode-item:focus-visible,
+.trailer-list button:focus-visible,
+.provider-list a:focus-visible,
+.close-button:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 5px rgba(57, 255, 20, .18);
+}
+
+.primary-button:active,
+.watch-button:active,
+.save-button:active,
+.episode-item:active:not(:disabled),
+.trailer-list button:active,
+.provider-list a:active {
+  transform: translateY(1px) scale(.98);
+}
+
+/* Primary (EXPLORE ANIME) */
+
+.primary-button {
+  padding: 14px 26px;
+  border-radius: 8px;
+  letter-spacing: 1.5px;
+  background: linear-gradient(135deg, var(--green), #7dff5f);
+  border-color: transparent;
+  box-shadow: 0 6px 22px rgba(57, 255, 20, .3);
+}
+
+.primary-button:hover {
+  background: linear-gradient(135deg, #7dff5f, var(--green));
+  color: #041004;
+  box-shadow: 0 10px 30px rgba(57, 255, 20, .45);
+  transform: translateY(-2px);
+}
+
+/* Card: VIEW DETAILS (slide-up fill) */
+
+.card-actions .watch-button {
+  padding: 11px 12px;
+  border-radius: 7px;
+  color: var(--green);
+  background: transparent;
+  border: 1px solid var(--green);
+  letter-spacing: 1px;
+  overflow: hidden;
+}
+
+.card-actions .watch-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--green);
+  transform: translateY(101%);
+  transition: transform .3s cubic-bezier(.2, .7, .2, 1);
+}
+
+.card-actions .watch-button:hover {
+  color: #041004;
+  background: transparent;
+  box-shadow: 0 0 18px rgba(57, 255, 20, .35);
+}
+
+.card-actions .watch-button:hover::before {
+  transform: translateY(0);
+}
+
+/* Card: + WATCHLIST (ghost) */
+
+.card-actions .save-button {
+  padding: 11px 12px;
+  border-radius: 7px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, .03);
+  border: 1px solid rgba(255, 255, 255, .12);
+  letter-spacing: 1px;
+}
+
+.card-actions .save-button:hover {
+  color: var(--text);
+  background: rgba(57, 255, 20, .1);
+  border-color: var(--border);
+}
+
+.card-actions .save-button.is-saved {
+  color: var(--green);
+  background: rgba(57, 255, 20, .12);
+  border-color: var(--green);
+}
+
+/* Episodes */
+
+.episode-item {
+  transition-property: background-color, border-color, transform, box-shadow;
+}
+
+.episode-item:hover:not(:disabled) {
+  border-color: var(--green);
+  background: rgba(57, 255, 20, .08);
+  transform: translateX(4px);
+}
+
+.episode-item:hover:not(:disabled) .episode-play-state {
+  color: #041004;
+  background: var(--green);
+}
+
+.episode-play-state {
+  padding: 6px 11px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--green);
+  border: 1px solid var(--border);
+  transition: background-color .25s ease, color .25s ease;
+  white-space: nowrap;
+}
+
+.episode-item:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.episode-item:disabled .episode-play-state {
+  color: var(--muted);
+  border-style: dashed;
+}
+
+/* Trailers + provider links */
+
+.trailer-list button strong {
+  padding: 6px 11px;
+  border-radius: 999px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--green);
+  border: 1px solid var(--border);
+  transition: background-color .25s ease, color .25s ease;
+}
+
+.trailer-list button:hover {
+  transform: translateX(4px);
+  border-color: var(--green);
+  background: rgba(57, 255, 20, .08);
+}
+
+.trailer-list button:hover strong {
+  color: #041004;
+  background: var(--green);
+}
+
+.provider-list a span {
+  transition: transform .25s ease;
+}
+
+.provider-list a:hover {
+  background: rgba(57, 255, 20, .08);
+  transform: translateY(-2px);
+}
+
+.provider-list a:hover span {
+  transform: translate(3px, -3px);
+}
+
+/* Touch devices */
+
+@media (hover: none) {
+  .anime-card:hover { transform: none; }
+
+  .card-actions .watch-button:hover::before { transform: translateY(101%); }
+  .card-actions .watch-button:hover { color: var(--green); box-shadow: none; }
+}
+
+@media (pointer: coarse) {
+  .card-actions .watch-button,
+  .card-actions .save-button { min-height: 44px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .episode-item:hover:not(:disabled),
+  .trailer-list button:hover,
+  .provider-list a:hover { transform: none; }
+}
+
+/* =========================================================
+   LUCIEN ANIME — animated hero text
+   ========================================================= */
+
+.hero h1.split {
+  animation: none;
+}
+
+.hero-content > .eyebrow {
+  animation:
+    heroIn .9s cubic-bezier(.2, .8, .2, 1) .25s backwards,
+    eyebrowTrack 1.4s cubic-bezier(.2, .8, .2, 1) .25s backwards;
+}
+
+.split-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.split-char {
+  display: inline-block;
+  will-change: transform, opacity;
+  transition: color .2s ease, transform .25s cubic-bezier(.2, .7, .2, 1), text-shadow .2s ease;
+  animation:
+    charIn .8s cubic-bezier(.2, .8, .2, 1) calc(.45s + var(--c) * 38ms) backwards,
+    charWave 7s ease-in-out calc(2.4s + var(--c) * 70ms) infinite;
+}
+
+.split-char:hover {
+  color: var(--green);
+  transform: translateY(-8px) scale(1.06);
+  text-shadow: 0 0 22px var(--green);
+}
+
+.hero-description.split .split-word {
+  animation: wordIn .7s ease calc(1.2s + var(--w) * 45ms) backwards;
+}
+
+.hero-description.split::after {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 1em;
+  margin-left: 6px;
+  vertical-align: -.15em;
+  background: var(--green);
+  box-shadow: 0 0 10px var(--green);
+  animation: caret 1s steps(1) infinite, fadeIn .3s ease 2.2s backwards;
+}
+
+@keyframes eyebrowTrack {
+  from { letter-spacing: 14px; opacity: 0; filter: blur(4px); }
+}
+
+@keyframes charIn {
+  from {
+    opacity: 0;
+    transform: translateY(.6em) rotate(8deg) scale(.7);
+    filter: blur(8px);
+  }
+}
+
+@keyframes charWave {
+  0%, 9%, 100% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  4% {
+    color: var(--green);
+    text-shadow: 0 0 24px var(--green), 0 0 48px rgba(57, 255, 20, .5);
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes wordIn {
+  from { opacity: 0; transform: translateY(10px); filter: blur(4px); }
+}
+
+@keyframes caret {
+  0%, 49%  { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@media (max-width: 760px) {
+  .split-char:hover { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .split-char,
+  .hero-description.split .split-word,
+  .hero-description.split::after {
+    animation: none !important;
+  }
+  .hero-description.split::after { display: none; }
+}
+
+/* =========================================================
+   LUCIEN ANIME — genre dropdown (Tom Select theme)
+   ========================================================= */
+
+.ts-wrapper {
+  min-width: 190px;
+}
+
+/* The closed box */
+.ts-wrapper.single .ts-control,
+.ts-wrapper.single.input-active .ts-control {
+  padding: 12px 40px 12px 16px;
+  background: #09100b;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color .25s ease, box-shadow .25s ease, background-color .25s ease;
+}
+
+.ts-wrapper.single .ts-control > .item {
+  color: var(--text);
+}
+
+.ts-wrapper.single .ts-control:hover {
+  border-color: var(--green);
+  background: #0c150f;
+}
+
+.ts-wrapper.focus .ts-control,
+.ts-wrapper.dropdown-active .ts-control {
+  border-color: var(--green);
+  box-shadow: var(--glow);
+}
+
+/* Chevron */
+.ts-wrapper.single .ts-control::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  width: 8px;
+  height: 8px;
+  margin: -6px 0 0;
+  border: 0;
+  border-right: 2px solid var(--green);
+  border-bottom: 2px solid var(--green);
+  transform: rotate(45deg);
+  transition: transform .3s ease, margin .3s ease;
+}
+
+.ts-wrapper.single.dropdown-active .ts-control::after {
+  margin-top: -2px;
+  border-color: var(--green);
+  transform: rotate(225deg);
+}
+
+/* The open menu */
+.ts-dropdown,
+.ts-dropdown.single {
+  z-index: 40;
+  margin-top: 8px;
+  padding: 6px;
+  background: rgba(8, 16, 10, .97);
+  color: var(--text);
+  border: 1px solid var(--green);
+  border-radius: 12px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .6), var(--glow);
+  backdrop-filter: blur(14px);
+  overflow: hidden;
+  animation: dropdownIn .22s cubic-bezier(.2, .8, .2, 1);
+  transform-origin: top;
+}
+
+.ts-dropdown .ts-dropdown-content {
+  max-height: 280px;
+  padding: 0;
+}
+
+/* Options */
+.ts-dropdown .option {
+  padding: 0;
+  border-radius: 8px;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.genre-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: padding .2s ease;
+}
+
+.genre-option::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  flex: none;
+  border-radius: 50%;
+  background: rgba(57, 255, 20, .25);
+  transition: background-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.ts-dropdown .option.active {
+  background: rgba(57, 255, 20, .1);
+  color: var(--text);
+}
+
+.ts-dropdown .option.active .genre-option {
+  padding-left: 18px;
+}
+
+.ts-dropdown .option.active .genre-option::before {
+  background: var(--green);
+  box-shadow: 0 0 10px var(--green);
+  transform: scale(1.25);
+}
+
+.ts-dropdown .option.selected {
+  color: var(--green);
+  background: rgba(57, 255, 20, .06);
+}
+
+.ts-dropdown .option.selected.active {
+  background: rgba(57, 255, 20, .14);
+}
+
+.ts-dropdown .option.selected .genre-option::after {
+  content: "✓";
+  margin-left: auto;
+  font-weight: 800;
+}
+
+.ts-dropdown .no-results {
+  padding: 12px 14px;
+  color: var(--muted);
+}
+
+@keyframes dropdownIn {
+  from { opacity: 0; transform: translateY(-8px) scaleY(.94); }
+}
+
+@media (max-width: 760px) {
+  .ts-wrapper { min-width: 150px; }
+}
