@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="motion.css">
   <link rel="stylesheet" href="portfolio.css">
+  <link rel="stylesheet" href="hero3d.css">
 </head>
 
 <body>
@@ -41,6 +42,9 @@
   <main>
 
     <section class="hero" id="home">
+      <!-- 3D hero character stage, filled by hero3d.js -->
+      <div class="hero-3d" id="hero3d" aria-hidden="true"></div>
+
       <div class="hero-content">
         <p class="eyebrow">YOUR NEXT ANIME OBSESSION</p>
 
@@ -177,6 +181,18 @@
 
   <script src="motion.js"></script>
   <script src="portfolio.js"></script>
+
+  <!-- 3D hero character (three.js, MIT) -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.187.0/examples/jsm/",
+      "@pixiv/three-vrm": "https://cdn.jsdelivr.net/npm/@pixiv/three-vrm@3.4.0/lib/three-vrm.module.js"
+    }
+  }
+  </script>
+  <script type="module" src="hero3d.js"></script>
 
 </body>
 </html>
